@@ -11,15 +11,18 @@ namespace WebShopCleanCode
     {
         private IWebShopState _state;
         public Customer CurrentCustomer { get; set; }
-        public List<Product> Products = new();
+        public Database Database = new Database();
+        public List<Product> Products = new List<Product>();
 
         public WebShopContext()
         {
+            Products = Database.GetProducts();
             _state = new MainMenu();
         }
         public void CurrentMenu()
         {
             _state.CurrentMenu(this);
+            
         }
         public void ChangeMenu(IWebShopState newMenu) 
         {

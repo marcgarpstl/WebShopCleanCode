@@ -62,21 +62,21 @@ namespace WebShopCleanCode.States
             }
             if (choice == "ok" | choice == "k" | choice == "o")
             {
-                WhereTo(context, choice);
+                MainOk(context, choice);
             }
         }
-        private int WhereTo(WebShopContext state, string choice)
+        private int MainOk(WebShopContext context, string choice)
         {
             if (currentChoice == 1)
             {
-                state.ChangeMenu(new WaresMenu());
-                state.CurrentMenu();
+                context.ChangeMenu(new WaresMenu());
+                context.CurrentMenu();
             }
 
             if (currentChoice == 2 && currentCustomer != null)
             {
-                state.ChangeMenu(new CustomerMenu());
-                state.CurrentMenu();
+                context.ChangeMenu(new CustomerMenu());
+                context.CurrentMenu();
             }
             if (currentChoice == 2 && currentCustomer == null)
             {
@@ -84,8 +84,8 @@ namespace WebShopCleanCode.States
             }
             if (currentChoice == 3)
             {
-                state.ChangeMenu(new LoginMenu());
-                state.CurrentMenu();
+                context.ChangeMenu(new LoginMenu());
+                context.CurrentMenu();
             }
             if (currentChoice == 4)
             {

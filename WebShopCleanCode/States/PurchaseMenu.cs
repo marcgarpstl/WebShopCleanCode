@@ -24,7 +24,7 @@ namespace WebShopCleanCode.States
             Console.WriteLine(info);
             currentCustomer = context.CurrentCustomer;
 
-            PrintAllProducts();
+            PrintAllProducts(context);
 
             ManeuverLogics move = new ManeuverLogics(amountOfOptions, currentChoice);
             move.ManeuverLogic();
@@ -49,23 +49,28 @@ namespace WebShopCleanCode.States
             {
                 context.ChangeMenu(new WaresMenu());
             }
+            if (choice == "q" | choice == "quit")
+            {
+                Console.WriteLine("The console powers down. You are free to leave.");
+                Environment.Exit(0);
+            }
             if (choice == "ok" | choice == "k" | choice == "o")
             {
-                BuyProduct();
+                BuyProduct(context);
             }
         }
-        public void PrintAllProducts()
+        public void PrintAllProducts(WebShopContext context)
         {
             for (int i = 0; i < amountOfOptions; i++)
             {
-                Console.WriteLine(i + 1 + ": " + products[i].Name + ", " + products[i].Price + "kr");
+                Console.WriteLine(i + 1 + ": " + context.Products[i].Name + ", " + context.Products[i].Price + "kr");
             }
-            Console.WriteLine("Your funds: " + currentCustomer.Funds);
+            Console.WriteLine("Your funds: " + context.CurrentCustomer.Funds);
         }
-        public void BuyProduct()
+        public void BuyProduct(WebShopContext context)
         {
             int index = currentChoice - 1;
-            Product product = products[index];
+            Product product = context.Products[index];
             if (product.InStock())
             {
                 if (currentCustomer.CanAfford(product.Price))

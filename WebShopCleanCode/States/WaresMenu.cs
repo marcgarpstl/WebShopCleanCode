@@ -6,8 +6,6 @@ namespace WebShopCleanCode.States
     {
         ShowCurrentUser show = new();
         UserActionResponse action = new();
-        List<Product> products = new();
-        Database database = new Database();
         List<string> options;
         string info = "What would you like to do?";
         int currentChoice;
@@ -16,7 +14,6 @@ namespace WebShopCleanCode.States
 
         public WaresMenu()
         {
-            products = database.GetProducts();
             currentChoice = 1;
             amountOfOptions = 4;
             options = new List<string>
@@ -44,7 +41,6 @@ namespace WebShopCleanCode.States
         }
         private void Navigator(WebShopContext context)
         {
-
             string choice = Console.ReadLine().ToLower();
             if (currentChoice > 1 && choice == "l" | choice == "left")
             {
@@ -58,33 +54,44 @@ namespace WebShopCleanCode.States
             {
                 context.ChangeMenu(new MainMenu());
             }
+            if (choice == "q" | choice == "quit")
+            {
+                Console.WriteLine("The console powers down. You are free to leave.");
+                Environment.Exit(0);
+            }
             if (choice == "ok" | choice == "k" | choice == "o")
             {
-                if (currentChoice == 1)
-                {
-                    PrintProducts(context);
-                }
-                if (currentChoice == 2 && currentCustomer != null)
-                {
-                    context.ChangeMenu(new PurchaseMenu());
-                    context.CurrentMenu();
-                }
-                if (currentChoice == 2 && currentCustomer == null)
-                {
-                    action.PrintUserActionResponse("You must be logged in to purchase wares.");
-                }
-                if (currentChoice == 3)
-                {
-                    context.ChangeMenu(new SortMenu());
-                    context.CurrentMenu();
-                }
-                if (currentChoice == 4)
-                {
-                    context.ChangeMenu(new LoginMenu());
-                    context.CurrentMenu();
-                }
+                WaresOk(context);
             }
         }
+
+        private void WaresOk(WebShopContext context)
+        {
+            if (currentChoice == 1)
+            {
+                PrintProducts(context);
+            }
+            if (currentChoice == 2 && currentCustomer != null)
+            {
+                context.ChangeMenu(new PurchaseMenu());
+                context.CurrentMenu();
+            }
+            if (currentChoice == 2 && currentCustomer == null)
+            {
+                action.PrintUserActionResponse("You must be logged in to purchase wares.");
+            }
+            if (currentChoice == 3)
+            {
+                context.ChangeMenu(new SortMenu());
+                context.CurrentMenu();
+            }
+            if (currentChoice == 4)
+            {
+                context.ChangeMenu(new LoginMenu());
+                context.CurrentMenu();
+            }
+        }
+
         public void PrintProducts(WebShopContext context)
         {
             foreach (Product product in context.Products)

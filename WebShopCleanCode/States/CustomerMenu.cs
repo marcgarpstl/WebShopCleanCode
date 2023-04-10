@@ -64,12 +64,17 @@ namespace WebShopCleanCode.States
             {
                 context.ChangeMenu(new WaresMenu());
             }
+            if (choice == "q" | choice == "quit")
+            {
+                Console.WriteLine("The console powers down. You are free to leave.");
+                Environment.Exit(0);
+            }
             if (choice == "ok" | choice == "k" | choice == "o")
             {
-                WhereTo();
+                CustomerOk();
             }
         }
-        private int WhereTo()
+        private int CustomerOk()
         {
             if (currentChoice == 1)
             {

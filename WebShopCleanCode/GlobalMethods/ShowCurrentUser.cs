@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace WebShopCleanCode.GlobalMethods
 {
     public class ShowCurrentUser
-    {
-        
+    {  
         public void LoggedInUser(WebShopContext context)
         {
             if (context.CurrentCustomer == null)

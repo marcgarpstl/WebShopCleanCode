@@ -61,12 +61,17 @@ namespace WebShopCleanCode.States
             {
                 context.ChangeMenu(new MainMenu());
             }
+            if (choice == "q" | choice == "quit")
+            {
+                Console.WriteLine("The console powers down. You are free to leave.");
+                Environment.Exit(0);
+            }
             if (choice == "ok" | choice == "k" | choice == "o")
             {
-                WhereTo(context);
+                LoginOk(context);
             }
         }
-        private int WhereTo(WebShopContext context)
+        private int LoginOk(WebShopContext context)
         {
             if (currentChoice == 1)
             {
@@ -104,7 +109,7 @@ namespace WebShopCleanCode.States
             Console.WriteLine();
             return input;
         }
-        public void LoginCheck(WebShopContext state)
+        public void LoginCheck(WebShopContext context)
         {
             bool found = false;
             foreach (Customer customer in customers)
@@ -113,7 +118,7 @@ namespace WebShopCleanCode.States
                 {
                     action.PrintUserActionResponse(customer.Username + " logged in.");
                     currentCustomer = customer;
-                    state.CurrentCustomer = currentCustomer;
+                    context.CurrentCustomer = currentCustomer;
                     found = true;
                     break;
                 }
