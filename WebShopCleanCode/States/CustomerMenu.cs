@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebShopCleanCode.GlobalMethods;
+﻿using WebShopCleanCode.GlobalMethods;
 
 namespace WebShopCleanCode.States
 {
@@ -17,7 +12,7 @@ namespace WebShopCleanCode.States
         List<string> options;
         string info = "What would you like to do?";
         int currentChoice;
-        int amountOfOptions ;
+        int amountOfOptions;
         Customer currentCustomer;
 
         public CustomerMenu()
@@ -60,7 +55,7 @@ namespace WebShopCleanCode.States
             {
                 currentChoice++;
             }
-            if(choice == "back")
+            if (choice == "back")
             {
                 context.ChangeMenu(new WaresMenu());
             }

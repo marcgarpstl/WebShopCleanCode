@@ -1,9 +1,11 @@
-﻿namespace WebShopCleanCode.Builder
+﻿using WebShopCleanCode.GlobalMethods;
+
+namespace WebShopCleanCode.Builder
 {
 
     public class GetUserInputClass
     {
-        private WebShop shop = new();
+        UserActionResponse action = new();
         Database db = new();
 
         public string GetUsernameInput()
@@ -19,7 +21,7 @@
                 {
                     if (customer.Username.Equals(newUsername))
                     {
-                        shop.PrintUserActionResponse("Username already exists.");
+                        action.PrintUserActionResponse("Username already exists.");
                         userNameExist = true;
                         break;
                     }
@@ -48,7 +50,7 @@
                 string inputStr = Console.ReadLine();
                 if (inputStr.Equals(""))
                 {
-                    shop.PrintUserActionResponse("Please actually write something.");
+                    action.PrintUserActionResponse("Please actually write something.");
                     continue;
                 }
                 else
@@ -80,7 +82,7 @@
                 }
                 catch (FormatException e)
                 {
-                    shop.PrintUserActionResponse("Please write a number.");
+                    action.PrintUserActionResponse("Please write a number.");
                     continue;
                 }
             }
