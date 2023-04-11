@@ -77,7 +77,6 @@ namespace WebShopCleanCode.States
             {
                 username = MagicKeyBoardAppear("username");
             }
-
             if (currentChoice == 2 && currentCustomer == null)
             {
                 password = MagicKeyBoardAppear("password");

@@ -74,7 +74,6 @@ namespace WebShopCleanCode.States
             if (currentChoice == 2 && currentCustomer != null)
             {
                 context.ChangeMenu(new PurchaseMenu());
-                context.CurrentMenu();
             }
             if (currentChoice == 2 && currentCustomer == null)
             {
@@ -83,12 +82,10 @@ namespace WebShopCleanCode.States
             if (currentChoice == 3)
             {
                 context.ChangeMenu(new SortMenu());
-                context.CurrentMenu();
             }
             if (currentChoice == 4)
             {
                 context.ChangeMenu(new LoginMenu());
-                context.CurrentMenu();
             }
         }
 

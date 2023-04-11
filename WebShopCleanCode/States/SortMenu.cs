@@ -70,34 +70,33 @@ namespace WebShopCleanCode.States
             if (currentChoice == 1)
             {
                 InsertionSort("name", false);
-                action.PrintUserActionResponse("Wares sorted.");
-                context.Products = products;
-                context.ChangeMenu(new WaresMenu());
+                SortedWares(context);
             }
-
             if (currentChoice == 2)
             {
                 InsertionSort("name", true);
-                action.PrintUserActionResponse("Wares sorted.");
-                context.Products = products;
-                context.ChangeMenu(new WaresMenu());
+                SortedWares(context);
             }
             if (currentChoice == 3)
             {
                 InsertionSort("price", false);
-                action.PrintUserActionResponse("Wares sorted.");
-                context.Products = products;
-                context.ChangeMenu(new WaresMenu());
+                SortedWares(context);
             }
             if (currentChoice == 4)
             {
                 InsertionSort("price", true);
-                action.PrintUserActionResponse("Wares sorted.");
-                context.Products = products;
-                context.ChangeMenu(new WaresMenu());
+                SortedWares(context);
             }
             return currentChoice;
         }
+
+        private void SortedWares(WebShopContext context)
+        {
+            action.PrintUserActionResponse("Wares sorted.");
+            context.Products = products;
+            context.ChangeMenu(new WaresMenu());
+        }
+
         public List<Product> InsertionSort(string variable, bool ascending)
         {
             if (variable.Equals("name"))

@@ -80,7 +80,6 @@ namespace WebShopCleanCode.States
             {
                 currentCustomer.PrintOrders();
             }
-
             if (currentChoice == 2)
             {
                 currentCustomer.PrintInfo();
