@@ -21,13 +21,17 @@ namespace WebShopCleanCode.States
                 "1. See all wares",
                 "2. Purchase a ware",
                 "3. Sort wares",
-                "4. Login"
+                "4. Logout"
             };
         }
         public void CurrentMenu(WebShopContext context)
         {
             Console.WriteLine(info);
             currentCustomer = context.CurrentCustomer;
+            if (currentCustomer == null)
+            {
+                options[3] = "4. Login";
+            }
 
             PrintMenu wares = new PrintMenu(options);
             wares.Menu();
@@ -83,7 +87,12 @@ namespace WebShopCleanCode.States
             {
                 context.ChangeMenu(new SortMenu());
             }
-            if (currentChoice == 4)
+            if (currentChoice == 4 && currentCustomer != null)
+            {
+                Console.WriteLine(context.CurrentCustomer.Username + " has logged out");
+                context.CurrentCustomer = null;
+            }
+            if (currentChoice == 4 && currentCustomer == null)
             {
                 context.ChangeMenu(new LoginMenu());
             }

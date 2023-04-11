@@ -20,7 +20,7 @@ namespace WebShopCleanCode.States
             {
                 "1. See Wares",
                 "2. Customer info",
-                "3. Login",
+                "3. Logout",
                 "4. Quit"
             };
         }
@@ -29,6 +29,10 @@ namespace WebShopCleanCode.States
             Console.WriteLine(info);
 
             currentCustomer = context.CurrentCustomer;
+            if (currentCustomer == null)
+            {
+                options[2] = "3. Login";
+            }
 
             PrintMenu main = new PrintMenu(options);
             main.Menu();
@@ -79,7 +83,12 @@ namespace WebShopCleanCode.States
             {
                 Console.WriteLine("Nobody is logged in!");
             }
-            if (currentChoice == 3)
+            if (currentChoice == 3 && currentCustomer != null)
+            {
+                Console.WriteLine(context.CurrentCustomer.Username + " has logged out");
+                context.CurrentCustomer = null;
+            }
+            if (currentChoice == 3 && currentCustomer == null)
             {
                 context.ChangeMenu(new LoginMenu());
             }

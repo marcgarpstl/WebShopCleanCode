@@ -1,6 +1,4 @@
-﻿using WebShopCleanCode.States;
-
-namespace WebShopCleanCode
+﻿namespace WebShopCleanCode
 {
     public class WebShop
     {
@@ -26,7 +24,7 @@ namespace WebShopCleanCode
         string username = null;
         string password = null;
         Customer currentCustomer;
-        private IWebShopState currentMenuState;
+
 
 
 

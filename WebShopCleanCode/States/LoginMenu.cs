@@ -27,7 +27,7 @@ namespace WebShopCleanCode.States
             {
                 "1. Set Username",
                 "2. Set Password",
-                "3. Login",
+                "3. Logout",
                 "4. Register"
             };
         }
@@ -35,6 +35,10 @@ namespace WebShopCleanCode.States
         {
             Console.WriteLine(info);
             currentCustomer = context.CurrentCustomer;
+            if (currentCustomer == null)
+            {
+                options[2] = "3. Login";
+            }
 
             PrintMenu login = new PrintMenu(options);
             login.Menu();
@@ -81,7 +85,12 @@ namespace WebShopCleanCode.States
             {
                 password = MagicKeyBoardAppear("password");
             }
-            if (currentChoice == 3)
+            if (currentChoice == 3 && currentCustomer != null)
+            {
+                Console.WriteLine(context.CurrentCustomer.Username + " has logged out");
+                context.CurrentCustomer = null;
+            }
+            if (currentChoice == 3 && currentCustomer == null)
             {
                 if (username == null || password == null)
                 {
@@ -90,12 +99,13 @@ namespace WebShopCleanCode.States
                 else
                 {
                     LoginCheck(context);
+                    context.ChangeMenu(new MainMenu());
                 }
             }
             if (currentChoice == 4)
             {
                 Customer newCustomer = AddCustomer();
-                currentCustomer = newCustomer;
+                context.CurrentCustomer = newCustomer;
                 action.PrintUserActionResponse(newCustomer.Username + " successfully added and is now logged in.");
             }
             return currentChoice;
