@@ -139,7 +139,7 @@ namespace WebShopCleanCode.States
         public Customer AddCustomer()
         {
             CustomerBuilder newUser = new CustomerBuilder();
-            Customer newCustomer = newUser.NewCustomer().Build();
+            Customer newCustomer = newUser.Build();
             customers.Add(newCustomer);
             return newCustomer;
         }

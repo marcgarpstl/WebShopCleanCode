@@ -7,7 +7,7 @@ using System.Xml.XPath;
 
 namespace WebShopCleanCode.GlobalMethods
 {
-    public class Navigation
+    public class Navigation  // Inprogress
     {
         int amountOfOptions;
         int currentChoice;

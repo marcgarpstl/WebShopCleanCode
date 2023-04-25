@@ -40,7 +40,7 @@ namespace WebShopCleanCode.Builder
             {
                 return GetUserInfo(messege);
             }
-            return "";
+            return null;
         }
         public string GetUserInfo(string messege)
         {
