@@ -6,19 +6,7 @@
         private Customer _customer = new();
         private GetUserInputClass _inputClass = new();
 
-        //public CustomerBuilder NewCustomer()
-        //{
-        //    _customer.Username = SetUsername();
-        //    _customer.Password = SetPassword();
-        //    _customer.FirstName = SetFirstName();
-        //    _customer.LastName = SetLastName();
-        //    _customer.Email = SetEmail();
-        //    _customer.Age = SetAge();
-        //    _customer.Address = SetAddress();
-        //    _customer.PhoneNumber = SetPhoneNumber();
 
-        //    return this;
-        //}
         public void SetUsername()
         {
             _customer.Username = _inputClass.GetUsernameInput();
