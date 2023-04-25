@@ -42,6 +42,9 @@ namespace WebShopCleanCode.States
 
             show.LoggedInUser(context);
 
+            //Navigation naVi = new Navigation(amountOfOptions, currentChoice);
+            //currentChoice = naVi.Navigator();
+
             Navigator(context);
         }
         private void Navigator(WebShopContext context)
@@ -66,10 +69,10 @@ namespace WebShopCleanCode.States
             }
             if (choice == "ok" | choice == "k" | choice == "o")
             {
-                MainOk(context, choice);
+                MainOk(context);
             }
         }
-        private int MainOk(WebShopContext context, string choice)
+        private int MainOk(WebShopContext context)
         {
             if (currentChoice == 1)
             {

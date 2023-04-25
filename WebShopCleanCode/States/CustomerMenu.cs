@@ -55,14 +55,14 @@ namespace WebShopCleanCode.States
             {
                 currentChoice++;
             }
-            if (choice == "back")
-            {
-                context.ChangeMenu(new WaresMenu());
-            }
             if (choice == "q" | choice == "quit")
             {
                 Console.WriteLine("The console powers down. You are free to leave.");
                 Environment.Exit(0);
+            }
+            if (choice == "back")
+            {
+                context.ChangeMenu(new WaresMenu());
             }
             if (choice == "ok" | choice == "k" | choice == "o")
             {
