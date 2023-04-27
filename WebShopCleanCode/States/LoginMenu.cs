@@ -65,7 +65,7 @@ namespace WebShopCleanCode.States
                 password = MagicKeyBoardAppear("password");
                 context.password = password;
             }
-            if (currentChoice == 3 && currentCustomer != null)
+            if (currentChoice == 3 && context.CurrentCustomer != null)
             {
                 Console.WriteLine(context.CurrentCustomer.Username + " has logged out");
                 context.CurrentCustomer = null;
