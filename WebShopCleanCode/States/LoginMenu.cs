@@ -13,8 +13,8 @@ namespace WebShopCleanCode.States
         string info = "Please submit username and password.";
         int currentChoice;
         int amountOfOptions;
-        string username = null;
-        string password = null;
+        string username;
+        string password;
         Customer currentCustomer;
 
         public LoginMenu()
@@ -47,42 +47,23 @@ namespace WebShopCleanCode.States
 
             show.LoggedInUser(context);
 
-            Navigator(context);
+            Navigation naVi = new Navigation(amountOfOptions, currentChoice);
+            naVi.Navigator(context, new LoginMenu());
+            currentChoice = naVi.LeftAndRight();
+
         }
-        private void Navigator(WebShopContext context)
-        {
-            string choice = Console.ReadLine().ToLower();
-            if (currentChoice > 1 && choice == "l" | choice == "left")
-            {
-                currentChoice--;
-            }
-            if (currentChoice < amountOfOptions && choice == "r" | choice == "right")
-            {
-                currentChoice++;
-            }
-            if (choice == "back" | choice == "b")
-            {
-                context.ChangeMenu(new MainMenu());
-            }
-            if (choice == "q" | choice == "quit")
-            {
-                Console.WriteLine("The console powers down. You are free to leave.");
-                Environment.Exit(0);
-            }
-            if (choice == "ok" | choice == "k" | choice == "o")
-            {
-                LoginOk(context);
-            }
-        }
-        private int LoginOk(WebShopContext context)
+
+        public void LoginOk(WebShopContext context, int currentChoice)
         {
             if (currentChoice == 1)
             {
                 username = MagicKeyBoardAppear("username");
+                context.username = username;
             }
             if (currentChoice == 2 && currentCustomer == null)
             {
                 password = MagicKeyBoardAppear("password");
+                context.password = password;
             }
             if (currentChoice == 3 && currentCustomer != null)
             {
@@ -91,7 +72,7 @@ namespace WebShopCleanCode.States
             }
             if (currentChoice == 3 && currentCustomer == null)
             {
-                if (username == null || password == null)
+                if (context.username == null || context.password == null)
                 {
                     action.PrintUserActionResponse("Incomplete data.");
                 }
@@ -107,7 +88,6 @@ namespace WebShopCleanCode.States
                 context.CurrentCustomer = newCustomer;
                 action.PrintUserActionResponse(newCustomer.Username + " successfully added and is now logged in.");
             }
-            return currentChoice;
         }
         public string MagicKeyBoardAppear(string name)
         {
@@ -122,7 +102,7 @@ namespace WebShopCleanCode.States
             bool found = false;
             foreach (Customer customer in customers)
             {
-                if (username.Equals(customer.Username) && customer.CheckPassword(password))
+                if (context.username.Equals(customer.Username) && customer.CheckPassword(context.password))
                 {
                     action.PrintUserActionResponse(customer.Username + " logged in.");
                     currentCustomer = customer;

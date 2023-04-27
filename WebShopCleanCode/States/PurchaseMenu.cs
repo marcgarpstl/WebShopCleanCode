@@ -31,7 +31,11 @@ namespace WebShopCleanCode.States
 
             show.LoggedInUser(context);
 
-            Navigator(context);
+            Navigation naVi = new Navigation(amountOfOptions, currentChoice);
+            naVi.Navigator(context, new PurchaseMenu());
+            currentChoice = naVi.LeftAndRight();
+
+            //Navigator(context);
         }
         private void Navigator(WebShopContext context)
         {
@@ -56,7 +60,7 @@ namespace WebShopCleanCode.States
             }
             if (choice == "ok" | choice == "k" | choice == "o")
             {
-                BuyProduct(context);
+                BuyProduct(context, currentChoice);
             }
         }
         public void PrintAllProducts(WebShopContext context)
@@ -67,7 +71,7 @@ namespace WebShopCleanCode.States
             }
             Console.WriteLine("Your funds: " + context.CurrentCustomer.Funds);
         }
-        public void BuyProduct(WebShopContext context)
+        public void BuyProduct(WebShopContext context, int currentChoice)
         {
             int index = currentChoice - 1;
             Product product = context.Products[index];

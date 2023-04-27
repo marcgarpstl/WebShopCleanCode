@@ -42,54 +42,32 @@ namespace WebShopCleanCode.States
 
             show.LoggedInUser(context);
 
-            Navigator(context);
+            Navigation naVi = new Navigation(amountOfOptions, currentChoice);
+            naVi.Navigator(context, new CustomerMenu());
+            currentChoice = naVi.LeftAndRight();
+
         }
-        private void Navigator(WebShopContext context)
-        {
-            string choice = Console.ReadLine().ToLower();
-            if (currentChoice > 1 && choice == "l" | choice == "left")
-            {
-                currentChoice--;
-            }
-            if (currentChoice < amountOfOptions && choice == "r" | choice == "right")
-            {
-                currentChoice++;
-            }
-            if (choice == "q" | choice == "quit")
-            {
-                Console.WriteLine("The console powers down. You are free to leave.");
-                Environment.Exit(0);
-            }
-            if (choice == "back")
-            {
-                context.ChangeMenu(new WaresMenu());
-            }
-            if (choice == "ok" | choice == "k" | choice == "o")
-            {
-                CustomerOk();
-            }
-        }
-        private int CustomerOk()
+
+        public void CustomerOk(int currentChoice, WebShopContext context)
         {
             if (currentChoice == 1)
             {
-                currentCustomer.PrintOrders();
+                context.CurrentCustomer.PrintOrders();
             }
             if (currentChoice == 2)
             {
-                currentCustomer.PrintInfo();
+                context.CurrentCustomer.PrintInfo();
             }
             if (currentChoice == 3)
             {
-                AddFunds();
+                AddFunds(context);
             }
             if (currentChoice == 4)
             {
                 Environment.Exit(0);
             }
-            return currentChoice;
         }
-        public void AddFunds()
+        public void AddFunds(WebShopContext context)
         {
             Console.WriteLine("How many funds would you like to add?");
             string amountString = Console.ReadLine();
@@ -102,7 +80,7 @@ namespace WebShopCleanCode.States
                 }
                 else
                 {
-                    currentCustomer.Funds += amount;
+                    context.CurrentCustomer.Funds += amount;
                     action.PrintUserActionResponse(amount + " added to your profile.");
                 }
             }

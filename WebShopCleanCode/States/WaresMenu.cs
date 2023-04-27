@@ -41,35 +41,14 @@ namespace WebShopCleanCode.States
 
             show.LoggedInUser(context);
 
-            Navigator(context);
-        }
-        private void Navigator(WebShopContext context)
-        {
-            string choice = Console.ReadLine().ToLower();
-            if (currentChoice > 1 && choice == "l" | choice == "left")
-            {
-                currentChoice--;
-            }
-            if (currentChoice < amountOfOptions && choice == "r" | choice == "right")
-            {
-                currentChoice++;
-            }
-            if (choice == "back")
-            {
-                context.ChangeMenu(new MainMenu());
-            }
-            if (choice == "q" | choice == "quit")
-            {
-                Console.WriteLine("The console powers down. You are free to leave.");
-                Environment.Exit(0);
-            }
-            if (choice == "ok" | choice == "k" | choice == "o")
-            {
-                WaresOk(context);
-            }
-        }
+            Navigation naVi = new Navigation(amountOfOptions, currentChoice);
+            naVi.Navigator(context, new WaresMenu());
+            currentChoice = naVi.LeftAndRight();
 
-        private void WaresOk(WebShopContext context)
+        }
+   
+
+        public void WaresOk(WebShopContext context, int currentChoice)
         {
             if (currentChoice == 1)
             {

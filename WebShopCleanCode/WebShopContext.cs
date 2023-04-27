@@ -13,11 +13,15 @@ namespace WebShopCleanCode
         public Customer CurrentCustomer { get; set; }
         public Database Database = new Database();
         public List<Product> Products = new List<Product>();
+        public string username { get; set; }
+        public string password { get; set; }
 
         public WebShopContext()
         {
             Products = Database.GetProducts();
             _state = new MainMenu();
+            username = string.Empty;
+            password = string.Empty;
         }
         public void CurrentMenu()
         {
