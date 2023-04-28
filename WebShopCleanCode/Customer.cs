@@ -4,6 +4,7 @@ namespace WebShopCleanCode
 {
     public class Customer : IProxyCustomer
     {
+        IProxyCustomer customer = new CustomerProxy();
         public string Username { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
@@ -30,6 +31,7 @@ namespace WebShopCleanCode
 
         public Customer()
         {
+            
         }
 
         public bool CanAfford(int price)
@@ -46,89 +48,19 @@ namespace WebShopCleanCode
             return password.Equals(Password);
         }
 
-        public void PrintInfo()
+        public void PrintInfo(WebShopContext context)
         {
-
+            //customer = context.CurrentCustomer;
             Console.Write("\nUsername: " + Username + "");
-            ShowPassword();
-            ShowFirstName();
-            ShowLastName();
-            ShowEmail();
-            ShowAge();
-            ShowAddress();
-            ShowPhoneNumber();
-            Console.WriteLine(", Funds: " + Funds + "\n");
+            customer.GetPassword(context);
+            customer.GetFirstName();
+            customer.GetLastName();
+            customer.GetAge();
+            customer.GetAddress();
+            customer.GetEmail();
+            customer.GetPhoneNumber();
+            Console.WriteLine("\nFunds: " + Funds + "\n");
 
-        }
-
-        public string ShowPhoneNumber()
-        {
-            if (PhoneNumber != null)
-            {
-                Console.Write(", Phone Number: " + PhoneNumber);
-                return PhoneNumber;
-            }
-            return "";
-        }
-
-        public string ShowAddress()
-        {
-            if (Address != null)
-            {
-                Console.Write(", Address: " + Address);
-                return Address;
-            }
-            return "";
-        }
-
-        public int ShowAge()
-        {
-            if (Age != -1)
-            {
-                Console.Write(", Age: " + Age);
-                return Age;
-            }
-            return -1;
-        }
-
-        public string ShowEmail()
-        {
-            if (Email != null)
-            {
-                Console.Write(", Email: " + Email);
-                return Email;
-            }
-            return "";
-        }
-
-        public string ShowLastName()
-        {
-            if (LastName != null)
-            {
-                Console.Write(", Last Name: " + LastName);
-                return LastName;
-            }
-            return "";
-        }
-
-        public string ShowFirstName()
-        {
-            if (FirstName != null)
-            {
-                Console.Write(", First Name: " + FirstName);
-                return FirstName;
-            }
-            return "";
-        }
-
-        public string ShowPassword()
-        {
-            if (Password != null)
-            {
-                Console.Write(", Password: " + Password);
-                return Password;
-            }
-            return "";
         }
 
         public void PrintOrders()
@@ -144,6 +76,42 @@ namespace WebShopCleanCode
             }
 
             Console.WriteLine();
+        }
+
+        public string GetPassword(WebShopContext context)
+        {
+            return Password;
+        }
+
+        public string GetFirstName()
+        {
+            
+            return FirstName;
+        }
+
+        public string GetLastName()
+        {
+            return LastName;
+        }
+
+        public string GetEmail()
+        {
+            return Email;
+        }
+
+        public int GetAge()
+        {
+            return Age;
+        }
+
+        public string GetAddress()
+        {
+            return Address;
+        }
+
+        public string GetPhoneNumber()
+        {
+            return PhoneNumber;
         }
     }
 }

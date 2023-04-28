@@ -70,6 +70,8 @@ namespace WebShopCleanCode.States
             {
                 Console.WriteLine(context.CurrentCustomer.Username + " has logged out");
                 context.CurrentCustomer = null;
+                context.username = null;
+                context.password = null;
             }
             if (currentChoice == 4 && currentCustomer == null)
             {

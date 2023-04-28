@@ -56,7 +56,7 @@ namespace WebShopCleanCode.States
             }
             if (currentChoice == 2)
             {
-                context.CurrentCustomer.PrintInfo();
+                context.CurrentCustomer.PrintInfo(context);
             }
             if (currentChoice == 3)
             {

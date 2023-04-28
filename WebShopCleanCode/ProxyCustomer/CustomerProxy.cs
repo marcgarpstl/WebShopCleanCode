@@ -2,40 +2,114 @@
 {
     public class CustomerProxy : IProxyCustomer
     {
-        Customer _customer;
-        public string ShowAddress()
+        List<Customer> customers = new();
+        private Customer customer;
+
+        public CustomerProxy()
         {
-            return _customer.ShowAddress();
+
+        }
+        public void MakeCustomerContext(WebShopContext context)
+        {
+            customer = context.CurrentCustomer;
+        }
+        public string GetAddress()
+        {
+            if (customer.Address != null)
+            {
+                ShowAddress();
+            }
+            return null;
         }
 
-        public int ShowAge()
+        private void ShowAddress()
         {
-            return _customer.ShowAge();
+            Console.Write("\nAddress: " +  customer.Address);
         }
 
-        public string ShowEmail()
+        public int GetAge()
         {
-            return _customer.ShowEmail();
+            if (customer.Age != 0)
+            {
+                ShowAge();
+            }
+            return 0;
         }
 
-        public string ShowFirstName()
+        private void ShowAge()
         {
-            return _customer.ShowFirstName();
+            Console.Write("\nAge :"  +  customer.Age);
         }
 
-        public string ShowLastName()
+        public string GetEmail()
         {
-            return _customer.ShowLastName();
+            if (customer.Email != null)
+            {
+                ShowEmail();
+            }
+            return null;
         }
 
-        public string ShowPassword()
+        private void ShowEmail()
         {
-            return _customer.ShowPassword();
+            Console.Write("\nEmail: " + customer.Email);
         }
 
-        public string ShowPhoneNumber()
+        public string GetFirstName()
         {
-            return _customer.ShowPhoneNumber();
+            if (customer.FirstName != null)
+            {
+                ShowFirstName();
+            }
+            return null;
+        }
+
+        private void ShowFirstName()
+        {
+            Console.Write("\nFirstname: " + customer.FirstName);
+        }
+
+        public string GetLastName()
+        {
+            if (customer.GetLastName != null)
+            {
+                ShowLastName();
+            }
+            return null;
+        }
+
+        private void ShowLastName()
+        {
+            Console.Write("\nLastname: " + customer.LastName);
+        }
+
+        public string GetPassword(WebShopContext context)
+        {
+            MakeCustomerContext(context);
+            if (customer.Password != null)
+            {
+                ShowPassword();
+            }
+            return null;
+        }
+
+        private void ShowPassword()
+        {
+            Console.Write("\nPassword: " + customer.Password + "");
+        }
+
+        public string GetPhoneNumber()
+        {
+            if (customer.PhoneNumber != null)
+            {
+                ShowPhoneNumber();
+            }
+            return null;
+        }
+
+        private void ShowPhoneNumber()
+        {
+            Console.Write("\nPhonenumber: " + customer.PhoneNumber + "");
         }
     }
 }
