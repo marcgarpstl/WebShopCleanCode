@@ -1,6 +1,6 @@
 ﻿namespace WebShopCleanCode.Proxy
 {
-    public interface IProxyCustomer
+    public interface NotAIProxyCustomer
     {
         string GetPassword(WebShopContext context);
         string GetFirstName();

@@ -2,7 +2,6 @@
 {
     public class NotACustomerProxy : NotAIProxyCustomer
     {
-        List<Customer> customers = new();
         private Customer customer;
 
         public NotACustomerProxy()
@@ -24,7 +23,7 @@
 
         private void ShowAddress()
         {
-            Console.Write("\nAddress: " +  customer.Address);
+            Console.Write("\nAddress: " + customer.Address);
         }
 
         public int GetAge()
@@ -38,7 +37,7 @@
 
         private void ShowAge()
         {
-            Console.Write("\nAge :"  +  customer.Age);
+            Console.Write("\nAge :" + customer.Age);
         }
 
         public string GetEmail()
