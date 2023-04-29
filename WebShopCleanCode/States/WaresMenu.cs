@@ -7,6 +7,7 @@ namespace WebShopCleanCode.States
         ShowCurrentUser show = new();
         UserActionResponse action = new();
         List<string> options;
+        Database db = new();
         string info = "What would you like to do?";
         int currentChoice;
         int amountOfOptions;
@@ -52,13 +53,13 @@ namespace WebShopCleanCode.States
         {
             if (currentChoice == 1)
             {
-                PrintProducts(context);
+                context.ChangeMenu(new SingleProductMenu());
             }
-            if (currentChoice == 2 && currentCustomer != null)
+            if (currentChoice == 2 && context.CurrentCustomer != null)
             {
                 context.ChangeMenu(new PurchaseMenu());
             }
-            if (currentChoice == 2 && currentCustomer == null)
+            if (currentChoice == 2 && context.CurrentCustomer == null)
             {
                 action.PrintUserActionResponse("You must be logged in to purchase wares.");
             }
@@ -66,26 +67,19 @@ namespace WebShopCleanCode.States
             {
                 context.ChangeMenu(new SortMenu());
             }
-            if (currentChoice == 4 && currentCustomer != null)
+            if (currentChoice == 4 && context.CurrentCustomer != null)
             {
                 Console.WriteLine(context.CurrentCustomer.Username + " has logged out");
                 context.CurrentCustomer = null;
                 context.username = null;
                 context.password = null;
             }
-            if (currentChoice == 4 && currentCustomer == null)
+            if (currentChoice == 4 && context.CurrentCustomer == null)
             {
                 context.ChangeMenu(new LoginMenu());
             }
         }
 
-        public void PrintProducts(WebShopContext context)
-        {
-            foreach (Product product in context.Products)
-            {
-                product.PrintInfo();
-            }
-            Console.WriteLine();
-        }
+
     }
 }

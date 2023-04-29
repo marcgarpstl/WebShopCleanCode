@@ -35,33 +35,6 @@ namespace WebShopCleanCode.States
             naVi.Navigator(context, new PurchaseMenu());
             currentChoice = naVi.LeftAndRight();
 
-            //Navigator(context);
-        }
-        private void Navigator(WebShopContext context)
-        {
-
-            string choice = Console.ReadLine().ToLower();
-            if (currentChoice > 1 && choice == "l" | choice == "left")
-            {
-                currentChoice--;
-            }
-            if (currentChoice < amountOfOptions && choice == "r" | choice == "right")
-            {
-                currentChoice++;
-            }
-            if(choice == "back")
-            {
-                context.ChangeMenu(new WaresMenu());
-            }
-            if (choice == "q" | choice == "quit")
-            {
-                Console.WriteLine("The console powers down. You are free to leave.");
-                Environment.Exit(0);
-            }
-            if (choice == "ok" | choice == "k" | choice == "o")
-            {
-                BuyProduct(context, currentChoice);
-            }
         }
         public void PrintAllProducts(WebShopContext context)
         {
@@ -77,11 +50,11 @@ namespace WebShopCleanCode.States
             Product product = context.Products[index];
             if (product.InStock())
             {
-                if (currentCustomer.CanAfford(product.Price))
+                if (context.CurrentCustomer.CanAfford(product.Price))
                 {
-                    currentCustomer.Funds -= product.Price;
+                    context.CurrentCustomer.Funds -= product.Price;
                     product.NrInStock--;
-                    currentCustomer.Orders.Add(new Order(product.Name, product.Price, DateTime.Now));
+                    context.CurrentCustomer.Orders.Add(new Order(product.Name, product.Price, DateTime.Now));
                     action.PrintUserActionResponse("Successfully bought " + product.Name);
                 }
                 else

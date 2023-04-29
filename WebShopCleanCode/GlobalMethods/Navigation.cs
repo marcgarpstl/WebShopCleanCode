@@ -11,6 +11,7 @@ namespace WebShopCleanCode.GlobalMethods
         PurchaseMenu purchase = new();
         SortMenu sort = new();
         LoginMenu login = new();
+        SingleProductMenu single = new();
         UserActionResponse response = new();
         int amountOfOptions;
         int currentChoice;
@@ -78,6 +79,10 @@ namespace WebShopCleanCode.GlobalMethods
             {
                 login.LoginOk(context, currentChoice);
             }
+            if(state is SingleProductMenu)
+            {
+                single.SingleItemOk(context, currentChoice);
+            }
         }
 
         private void BackChoices(WebShopContext context, IWebShopState state)
@@ -90,7 +95,7 @@ namespace WebShopCleanCode.GlobalMethods
             {
                 context.ChangeMenu(new MainMenu());
             }
-            if (state is PurchaseMenu | state is SortMenu | state is CustomerMenu)
+            if (state is PurchaseMenu | state is SortMenu | state is CustomerMenu | state is SingleProductMenu)
             {
                 context.ChangeMenu(new WaresMenu());
             }

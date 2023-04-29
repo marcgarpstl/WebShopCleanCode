@@ -1,11 +1,11 @@
 ﻿namespace WebShopCleanCode.Proxy
 {
-    public class CustomerProxy : IProxyCustomer
+    public class NotACustomerProxy : NotAIProxyCustomer
     {
         List<Customer> customers = new();
         private Customer customer;
 
-        public CustomerProxy()
+        public NotACustomerProxy()
         {
 
         }

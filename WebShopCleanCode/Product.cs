@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WebShopCleanCode.ProductProxy;
 
 namespace WebShopCleanCode
 {
-    public class Product
+    public class Product : IProductProxy
     {
         public string Name { get; set; }
         public int Price { get; set; }
         public int NrInStock { get; set; }
-        public Product(string name, int price, int nrInStock)
+        public string Desciption { get; set; }
+        public Product(string name, int price, int nrInStock, string desciption)
         {
             Name = name;
             Price = price;
             NrInStock = nrInStock;
+            Desciption = desciption;
         }
         public bool InStock()
         {
@@ -23,7 +21,27 @@ namespace WebShopCleanCode
         }
         public void PrintInfo()
         {
-            Console.WriteLine(Name + ": " + Price + "kr, " + NrInStock + " in stock.");
+            Console.WriteLine(Name + ": " + Price + "kr");
+        }
+
+        public string GetName()
+        {
+            return Name;
+        }
+
+        public int GetPrice()
+        {
+            return Price;
+        }
+
+        public int GetNrInStock()
+        {
+            return NrInStock;
+        }
+
+        public string GetDescription()
+        {
+            return Desciption;
         }
     }
 }

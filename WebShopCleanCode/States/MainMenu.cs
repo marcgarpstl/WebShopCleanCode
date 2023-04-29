@@ -29,7 +29,6 @@ namespace WebShopCleanCode.States
         public void CurrentMenu(WebShopContext context)
         {
             Console.WriteLine(info);
-
             currentCustomer = context.CurrentCustomer;
             if (currentCustomer == null)
             {
